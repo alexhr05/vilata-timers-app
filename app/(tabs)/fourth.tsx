@@ -2,7 +2,7 @@ import { images } from '@/constants/images'
 import React from 'react'
 import { ImageBackground, SafeAreaView, StyleSheet, Text } from 'react-native'
 
-const second = () => {
+const fourth = () => {
   return (
         <ImageBackground className="flex-1 w-full h-full" source={images.ImageBackground}
             resizeMode='stretch'
@@ -14,6 +14,6 @@ const second = () => {
   )
 }
 
-export default second
+export default fourth
 
 const styles = StyleSheet.create({})

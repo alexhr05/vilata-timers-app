@@ -5,7 +5,9 @@ import { ImageBackground, SafeAreaView, StyleSheet, Text } from 'react-native'
 const first = () => {
   return (
     
-    <ImageBackground className="flex-1 w-full h-full" source={images.ImageBackground}>
+    <ImageBackground className="flex-1 w-full h-full" source={images.ImageBackground}
+        resizeMode='stretch'
+        >
         <SafeAreaView className="flex-1 items-center justify-center bg-black/10">
             <Text className="text-white text-2xl font-bold">Hello from NativeWind</Text>
       </SafeAreaView>

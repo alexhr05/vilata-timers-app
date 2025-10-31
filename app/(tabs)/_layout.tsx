@@ -2,28 +2,28 @@
 import { images } from "@/constants/images";
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 
-// const TabIcon = ({focused, icon, title}: any) => {
-//     if(focused){
+const TabIcon = ({focused, icon, title}: any) => {
+    if(focused){
 
-//         return (
-//                 <ImageBackground source={images.timerIcon}
-//                     className="flex flex-row w-full flex-1 min-w-[112px] min-h-16 mt-4 justify-center
-//                     items-center rounded-full overflow-hidden"
-//                 >
-//                     <Image source={icon} tintColor="#151312" className="size-5" />
-//                     <Text className="text-secondary text-base font-semibold ml-2">{title}</Text>
-//                 </ImageBackground>
-//         );
-//     }
+        return (
+                <ImageBackground source={images.timerIcon}
+                    className="flex flex-row w-full flex-1 min-w-[112px] min-h-16 mt-4 justify-center
+                    items-center rounded-full overflow-hidden"
+                >
+                    <Image source={icon} tintColor="#151312" className="size-5" />
+                    <Text className="text-secondary text-base font-semibold ml-2">{title}</Text>
+                </ImageBackground>
+        );
+    }
 
-//     return(
-//         <View className="size-full justify-center items-center mt-4 rounded-full">
-//             <Image source={icon} tintColor="#A8B5DB" className="size-5"/>    
-//         </View>
-//     );
-// }
+    return(
+        <View className="size-full justify-center items-center mt-4 rounded-full">
+            <Image source={icon} tintColor="#A8B5DB" className="size-5"/>    
+        </View>
+    );
+}
 
 
 
@@ -55,21 +55,30 @@ const _layout = () => {
         <Tabs.Screen
           name="second"
           options={{
-            title: "Second",
-            headerShown:false
+            title: "Управление",
+            headerShown:false,
+            
           }}
+          
         />
         <Tabs.Screen
           name="settings"
           options={{
-            title: "Settings",
+            title: "Настройка Таймер",
             headerShown:false
           }}
         />
          <Tabs.Screen
           name="third"
           options={{
-            title: "Third",
+            title: "Регистър Ключове",
+            headerShown:false
+          }}
+        />
+          <Tabs.Screen
+          name="fourth"
+          options={{
+            title: "Вилата",
             headerShown:false
           }}
         />
