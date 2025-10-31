@@ -2,7 +2,7 @@
 import { images } from "@/constants/images";
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 // const TabIcon = ({focused, icon, title}: any) => {
 //     if(focused){
@@ -33,10 +33,10 @@ const _layout = () => {
     <Tabs
     screenOptions={{
         tabBarPosition: "top",
-    }}>
-        <View>
-            <Text>hahahaha</Text>
-        </View>
+    }}
+
+    >
+        
         <Tabs.Screen
           name="first"
           options={{
@@ -46,13 +46,7 @@ const _layout = () => {
               <>
                 <ImageBackground
                 source={images.timerIcon}
-                  className="w-10 h-10 items-center justify-center"
-                  
-
-                >
-                  {/* <Image source={images.timerIcon}
-                  tintColor="#151312" className="size-5"
-                  /> */}
+                  className="w-10 h-10 items-center justify-center">
                   
                 </ImageBackground>
               </>
