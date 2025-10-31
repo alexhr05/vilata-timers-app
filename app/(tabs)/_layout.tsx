@@ -47,7 +47,6 @@ const _layout = () => {
                 <ImageBackground
                 source={images.timerIcon}
                   className="w-10 h-10 items-center justify-center">
-                  
                 </ImageBackground>
               </>
             )
@@ -64,6 +63,13 @@ const _layout = () => {
           name="settings"
           options={{
             title: "Settings",
+            headerShown:false
+          }}
+        />
+         <Tabs.Screen
+          name="third"
+          options={{
+            title: "Third",
             headerShown:false
           }}
         />
