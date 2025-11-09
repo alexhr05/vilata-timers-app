@@ -90,7 +90,7 @@ const first = () => {
 
 
               <View className="flex-1">
-                <Text className="text-lg text-gray-700">
+                <Text className="text-md text-gray-700">
                   Изключил: {device.lastOff}
                 </Text>
                 {/* Buttons */}
