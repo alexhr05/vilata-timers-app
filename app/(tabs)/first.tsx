@@ -1,6 +1,7 @@
 import { images } from '@/constants/images';
-import React, { useState } from "react";
-import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { fetchDevices } from '../api';
 
 const devicesData = [
   {
@@ -44,6 +45,27 @@ const devicesData = [
 
 const first = () => {
   const [activeDevices, setActiveDevices] = useState<{ [key: number]: boolean }>({});
+  const [devices, setDevices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+    async function loadDevices() {
+      try {
+        const data = await fetchDevices();
+        setDevices(data);
+      } catch (err) {
+        console.log("Грешка при зареждане на устройствата:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadDevices();
+  }, []);
+
+  
+
 
   const toggleDevice = (id: number) => {
     setActiveDevices((prev) => ({
@@ -52,6 +74,24 @@ const first = () => {
     }));
   };
 
+  if(loading){
+    return(
+      <View className="flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color="blue" />
+        <Text>Зареждане...</Text>
+      </View>
+    )
+  }
+
+  if (error)
+    return (
+      <View className="flex-1 justify-center items-center">
+        <Text className="text-red-500">Грешка: {error}</Text>
+      </View>
+    );
+
+  
+
   return (
     
     <ImageBackground className="flex-1 w-full h-full" source={images.ImageBackground}
@@ -59,7 +99,7 @@ const first = () => {
         >
         <SafeAreaView className="flex-1 items-center justify-center bg-black/10 ">
         <ScrollView className="mt-10 mb-10" contentContainerStyle={{ paddingVertical: 20 }}>
-        {devicesData.map((device) => (
+        {devices.map((device) => (
           <View
             key={device.id}
             className="mx-4 mb-4 rounded-xl shadow-md bg-[#e9e8dd] overflow-hidden"
@@ -90,12 +130,18 @@ const first = () => {
 
 
               <View className="flex-1">
+                  <Text className="text-md text-gray-700">
+                    IP: {device.ip}
+                  </Text>
+                  <Text className="text-md text-gray-700">
+                    Статус: {device.status}
+                  </Text>
                 <Text className="text-md text-gray-700">
                   Изключил: {device.lastOff}
                 </Text>
                 {/* Buttons */}
                 <View className="flex-row mt-2 justify-between">
-                  {device.times.map((t) => (
+                  {device.times?.map((t:number) => (
                     <TouchableOpacity
                       key={t}
                       className="bg-gray-500 rounded-md px-3 py-1"
