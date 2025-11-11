@@ -1,7 +1,7 @@
 export async function fetchDevices(){
     try{
         //const response = await fetch("https://www.bgroutingmap.com/8/houmTaimerApk.php?m=14");
-        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+        const response = await fetch("http://www.bgroutingmap.com/8/houmTaimerApk.php?m=14");
 
         if(!response.ok){
             throw new Error("HTTP error: " + response.status);
