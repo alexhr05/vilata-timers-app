@@ -1,47 +1,7 @@
 import { images } from '@/constants/images';
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { fetchDevices } from '../api';
-
-const devicesData = [
-  {
-    id: 1,
-    name: "Бойлер Кухня",
-    lastOff: "2025-10-27 17:45:29",
-    times: [7, 15],
-  },
-  {
-    id: 2,
-    name: "Бойлер Баня",
-    lastOff: "2025-10-27 05:49:29",
-    times: [55, 85],
-  },
-  {
-    id: 3,
-    name: "Вилата Помпа",
-    lastOff: "2025-10-27 05:49:29",
-    times: [7, 20],
-  },
-  {
-    id: 4,
-    name: "Вилата Осветление откъм Двор",
-    lastOff: "2025-10-24 18:57:29",
-    times: [10, 180],
-  },
-  {
-    id: 5,
-    name: "Вилата Осветление откъм Улица",
-    lastOff: "2025-10-24 18:57:35",
-    times: [10, 180],
-  },
-  {
-    id: 6,
-    name: "Вилата Осветление Ограда",
-    lastOff: "2025-10-24 19:10:22",
-    times: [10, 180],
-  },
-];
-
 
 const first = () => {
   const [activeDevices, setActiveDevices] = useState<{ [key: number]: boolean }>({});
@@ -65,13 +25,28 @@ const first = () => {
   }, []);
 
   
-
-
-  const toggleDevice = (id: number) => {
+  const toggleDevice = async (id: number) => {
+    const currentState = activeDevices[id];
+    const newState = !currentState;
     setActiveDevices((prev) => ({
       ...prev,
       [id]: !prev[id],
     }));
+
+    const url = newState ?  "http://www.bgroutingmap.com/8/houmTaimerActionApk.php?ip_address=192.168.1.53&action=short"
+      : "http://www.bgroutingmap.com/8/houmTaimerActionApk.php?ip_address=192.168.1.53&action=off";
+
+    try{
+      const response = await fetch(url);
+      if(!response.ok){
+        throw new Error(`Грешка при изпълнението на заявката: ${response.status}`);
+      }
+
+    }catch (error) {
+      console.error("Грешка при заявката:", error);
+      Alert.alert("Грешка", "Неуспешна заявка до сървъра.");
+    }
+
   };
 
   if(loading){
@@ -165,5 +140,3 @@ const first = () => {
 }
 
 export default first
-
-const styles = StyleSheet.create({})
